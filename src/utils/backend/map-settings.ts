@@ -163,6 +163,11 @@ const validators: Record<keyof IUserMapSettings, (val: unknown) => boolean> = {
     hideATISOnly: val => {
         return typeof val === 'boolean';
     },
+    distanceMeasuring: val => {
+        if (!isObject(val)) return false;
+        if ('enableMeasuring' in val && typeof val.enableMeasuring !== 'boolean') return false;
+        return true;
+    },
 };
 
 export interface UserMapSettingsColor {
@@ -189,6 +194,10 @@ export interface UserMapSettingsVisibilityATC {
     firs: boolean;
     approach: boolean;
     ground: boolean;
+}
+
+export interface UserMapSettingsDistanceMeasuring {
+    enableMeasuring?: boolean;
 }
 
 export interface IUserMapSettings {
@@ -222,6 +231,7 @@ export interface IUserMapSettings {
         default?: UserMapSettingsColors;
         turns?: string;
     };
+    distanceMeasuring?: UserMapSettingsDistanceMeasuring;
 }
 
 export type UserMapSettings = Partial<IUserMapSettings>;

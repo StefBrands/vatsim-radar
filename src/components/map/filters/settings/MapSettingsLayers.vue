@@ -86,6 +86,16 @@
                 When <strong>not</strong> disabled, those aircraft are always excluded<br> from dep list when on ground
             </template>
         </common-toggle>
+        <common-toggle
+            :model-value="store.mapSettings.distanceMeasuring?.enableMeasuring"
+            @update:modelValue="setUserMapSettings({ distanceMeasuring: {enableMeasuring: $event } })"
+        >
+            Enable distance measuring
+            <template #description>
+                Distance 0,0 NM<br><br>
+                Drag with right click to measure distance between two points.
+            </template>
+        </common-toggle>
 
         <common-popup v-model="resetActive">
             <template #title>
